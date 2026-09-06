@@ -1,6 +1,3 @@
-<?php
-require __DIR__ . '/../displaymap.php';
-?>
 <!doctype html>
 <html lang="en">
 <head>
