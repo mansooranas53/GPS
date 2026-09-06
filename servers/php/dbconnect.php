@@ -27,9 +27,19 @@ $password = $url['pass'];
 
 $endpoint = explode('.', $host)[0];
 
+/*
+ * Neon workaround for older libpq/PDO on Vercel.
+ * The endpoint ID is passed together with the password.
+ */
+$password = "endpoint={$endpoint};{$password}";
+
 $pdo = new PDO(
-    "pgsql:host={$host};port={$port};dbname={$dbname};sslmode=require options=endpoint={$endpoint}",
+    "pgsql:host={$host};port={$port};dbname={$dbname};sslmode=verify-full",
     $user,
     $password,
     $params
 );
+
+$sqlFunctionCallMethod = 'select ';
+
+?>
