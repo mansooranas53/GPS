@@ -28,7 +28,7 @@ $password = $url['pass'];
 $endpoint = explode('.', $host)[0];
 
 $pdo = new PDO(
-    "pgsql:host={$host};port={$port};dbname={$dbname};sslmode=require;options=endpoint%3D{$endpoint}",
+    "pgsql:host={$host};port={$port};dbname={$dbname};sslmode=require options=endpoint={$endpoint}",
     $user,
     $password,
     $params
