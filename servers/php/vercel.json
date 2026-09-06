@@ -12,6 +12,10 @@
     {
       "src": "/displaymap.php",
       "dest": "/api/displaymap.php"
+    },
+    {
+      "src": "/api/(.*\\.php)",
+      "dest": "/api/$1"
     }
   ]
 }
