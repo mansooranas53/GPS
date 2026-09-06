@@ -27,10 +27,6 @@ $password = $url['pass'];
 
 $endpoint = explode('.', $host)[0];
 
-/*
- * Neon workaround for older libpq/PDO on Vercel.
- * The endpoint ID is passed together with the password.
- */
 $password = "endpoint={$endpoint};{$password}";
 
 $pdo = new PDO(
