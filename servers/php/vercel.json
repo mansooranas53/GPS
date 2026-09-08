@@ -11,8 +11,8 @@
       "dest": "/api/$1"
     },
     {
-      "src": "/",
-      "dest": "/api/displaymap.php"
+      "src": "/(.*)",
+      "dest": "/api/index.php"
     }
   ]
 }
