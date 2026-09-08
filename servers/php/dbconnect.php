@@ -26,10 +26,26 @@ $user = urldecode($url['user']);
 $password = urldecode($url['pass']);
 
 /*
- * Neon PostgreSQL connection
- * SSL is required, but no local root.crt file is needed.
+ * Force PostgreSQL to use encrypted connection
+ * without looking for ~/.postgresql/root.crt.
  */
-$dsn = "pgsql:host={$host};port={$port};dbname={$dbname};sslmode=require";
+putenv('PGSSLMODE=require');
+putenv('PGSSLROOTCERT=');
+
+/*
+ * Neon endpoint ID for SNI.
+ */
+$endpoint = explode('.', $host)[0];
+
+/*
+ * PostgreSQL connection to Neon.
+ */
+$dsn = "pgsql:"
+     . "host={$host};"
+     . "port={$port};"
+     . "dbname={$dbname};"
+     . "sslmode=require;"
+     . "options='endpoint={$endpoint}'";
 
 $pdo = new PDO(
     $dsn,
