@@ -22,15 +22,17 @@ $url = parse_url($databaseUrl);
 $host = $url['host'];
 $port = $url['port'] ?? 5432;
 $dbname = ltrim($url['path'], '/');
-$user = $url['user'];
-$password = $url['pass'];
+$user = urldecode($url['user']);
+$password = urldecode($url['pass']);
 
-$endpoint = explode('.', $host)[0];
-
-$password = "endpoint={$endpoint};{$password}";
+/*
+ * Neon PostgreSQL connection
+ * SSL is required, but no local root.crt file is needed.
+ */
+$dsn = "pgsql:host={$host};port={$port};dbname={$dbname};sslmode=require";
 
 $pdo = new PDO(
-    "pgsql:host={$host};port={$port};dbname={$dbname};sslmode=verify-full",
+    $dsn,
     $user,
     $password,
     $params
