@@ -7,16 +7,12 @@
   },
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
       "src": "/",
       "dest": "/api/displaymap.php"
-    },
-    {
-      "src": "/displaymap.php",
-      "dest": "/api/displaymap.php"
-    },
-    {
-      "src": "/api/(.*\\.php)",
-      "dest": "/api/$1"
     }
   ]
 }
